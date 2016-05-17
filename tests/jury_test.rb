@@ -19,10 +19,10 @@ class TestJury < Minitest::Test
 
   #=====Remember to uncomment one test method at a time.=====
 
-  # def test_jury_starts_as_empty_array
-  #   jury = Jury.new
-  #   assert_empty jury.members
-  # end
+  def test_jury_starts_as_empty_array
+    jury = Jury.new
+    assert_empty jury.members
+  end
   #
   # def test_cast_votes_returns_hash
   #   assert_kind_of Hash, @jury.cast_votes(@finalists)
