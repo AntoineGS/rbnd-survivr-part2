@@ -14,7 +14,8 @@ class Tribe
   def tribal_council(options=[])
     immune = options[:immune]
     if immune then
-      @members.reject{|a| a == immune}.sample
+      @members.reject{|member| member == immune}.sample
+    else @members.sample
     end
   end
 end
