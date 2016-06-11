@@ -21,7 +21,8 @@ class Game
     # Solution taken from
     # https://discussions.udacity.com/t/trouble-with-merge-in-game-class/164225
     contestants = @tribes.map(&:members).flatten
-    Tribe.new(name: name, members: contestants)
+    self.clear_tribes
+    @tribes.add_tribe(Tribe.new(name: name, members: contestants))
   end
 
   def individual_immunity_challenge
