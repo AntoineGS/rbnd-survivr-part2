@@ -21,45 +21,35 @@ require_relative "colorizr"
 
 #This is where you will write your code for the three phases
 def phase_one
-  puts "-------------"
-  puts "--Phase one--"
-  puts "-------------"
+  phase_output("one")
   8.times do
-    immune = @borneo.immunity_challenge
-    loser_index = @borneo.tribes.index{|exclude| exclude != immune}
+    loser_index = @borneo.tribes.find_index(@borneo.immunity_challenge)
     voted_out = @borneo.tribes[loser_index].tribal_council(nil: nil)
-    @borneo.tribes[loser_index].members.delete(voted_out)
-    puts "#{voted_out.to_s.capitalize.green} from tribe #{@borneo.tribes[loser_index].to_s.yellow} has been eliminated!"
   end
 end
 
 def phase_two
-  puts
-  puts "-------------"
-  puts "--Phase two--"
-  puts "-------------"
-
+  phase_output("two")
   3.times do
-    immune = @merge_tribe.members.sample
-    voted_out = @merge_tribe.tribal_council(immune: immune)
-    @merge_tribe.members.delete(voted_out)
-    puts "#{voted_out.to_s.capitalize.green} has be eliminated!"
+    immune = @borneo.individual_immunity_challenge
+    @merge_tribe.tribal_council(immune: immune)
   end
 end
 
 def phase_three
+  phase_output("three")
+  7.times do
+    immune = @borneo.individual_immunity_challenge
+    voted_out = @merge_tribe.tribal_council(immune: immune)
+    @jury.add_member(voted_out)
+  end
+end
+
+def phase_output(phase)
   puts
   puts "---------------"
-  puts "--Phase three--"
+  puts "  Phase #{phase}"
   puts "---------------"
-
-  7.times do
-    immune = @merge_tribe.members.sample
-    voted_out = @merge_tribe.tribal_council(immune: immune)
-    @merge_tribe.members.delete(voted_out)
-    @jury.add_member(voted_out)
-    puts "#{voted_out.to_s.capitalize.green} has be eliminated!"
-  end
 end
 
 

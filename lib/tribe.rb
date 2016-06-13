@@ -13,9 +13,9 @@ class Tribe
 
   def tribal_council(options=[])
     immune = options[:immune]
-    if immune then
-      @members.reject{|member| member == immune}.sample
-    else @members.sample
-    end
+    voted_out = @members.reject{|member| member == immune}.sample
+    @members.delete(voted_out)
+    puts "#{voted_out.to_s.capitalize.green} from tribe #{@name.to_s.yellow} has been eliminated!"
+    voted_out
   end
 end

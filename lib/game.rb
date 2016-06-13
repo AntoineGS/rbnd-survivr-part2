@@ -1,8 +1,8 @@
 class Game
   attr_accessor :tribes
 
-  def initialize(tribe1, tribe2)
-    @tribes = [tribe1, tribe2]
+  def initialize *tribes
+    @tribes = tribes
   end
 
   def add_tribe(tribe)
@@ -21,7 +21,9 @@ class Game
     # Solution taken from
     # https://discussions.udacity.com/t/trouble-with-merge-in-game-class/164225
     contestants = @tribes.map(&:members).flatten
-    Tribe.new(name: name, members: contestants)
+    clear_tribes
+    add_tribe(Tribe.new(name: name, members: contestants))
+    @tribes[0]
   end
 
   def individual_immunity_challenge

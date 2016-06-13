@@ -12,8 +12,7 @@ attr_accessor :votes
   end
 
   def cast_votes(finalists)
-    index = 0
-    @members.length.times do
+    @members.length.times do |index|
       finalist = finalists.sample
       @votes[finalist] +=1
       puts "#{@members[index].to_s.capitalize.pink} votes for #{finalist.to_s.capitalize.green}"
@@ -27,8 +26,9 @@ attr_accessor :votes
   end
 
   def announce_winner(final_votes)
+    winner = final_votes.max_by{|name,votes| votes}[0]
     puts
-    puts "And the winner is..... #{final_votes.keys.first.to_s.capitalize.red}"
-    final_votes.keys.first
+    puts "And the winner is..... #{winner.to_s.capitalize.red}"
+    winner
   end
 end
